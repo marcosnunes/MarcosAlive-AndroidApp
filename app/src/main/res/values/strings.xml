@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Marcos Alive</string>
+    <string name="marca">© 2018 Marcos Nunes</string>
+
+    <string name="abouttext">Olá! Eu criei este aplicativo basicamente para testar minhas habilidades em programação.
+         Aqui voce encontra um robô escrito em html / jquery. O site está hospedado no github pages e não salva as informações
+        do usuário. Divirta-se conversando comigo! O meu robô não vai aprender novos diálogos, mas existe bastante texto para
+        voce explorar esta experiência virtual divertida comigo. </string>
+    <string name="title_home">Chat</string>
+    <string name="title_portifolio">Portifólio</string>
+    <string name="title_info">Info</string>
+
+</resources>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "533431567938",
+    "firebase_url": "https://marcosalive2020.firebaseio.com",
+    "project_id": "marcosalive2020",
+    "storage_bucket": "marcosalive2020.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533431567938:android:749030d98bb70f712a4fdb",
+        "android_client_info": {
+          "package_name": "com.marcosalive2020"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533431567938-3o97h2qpo5q4mnevk9qtlll7ehfihlr3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.marcosalive2020",
+            "certificate_hash": "eb3ced469b34aedb533bbc1d961c5ca236796643"
+          }
+        },
+        {
+          "client_id": "533431567938-pjtvjpnapbrqhfae7lnu2b6e1ph2keo4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwnHYoIvJJSqJ0jDIyQaUjDT4Ds8kW3Ec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533431567938-pjtvjpnapbrqhfae7lnu2b6e1ph2keo4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
