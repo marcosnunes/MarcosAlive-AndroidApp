@@ -1,6 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
+repositories {
+    mavenLocal()
+    maven {
+        url 'https://download.01.org/crosswalk/releases/crosswalk/android/maven2'
+    }
+    maven {
+        url 'https://maven.google.com'
+    }
+}
+
 android {
     signingConfigs {
         release {
@@ -15,8 +25,8 @@ android {
         applicationId "com.marcosalive2020"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 5
-        versionName "1.4"
+        versionCode 6
+        versionName "1.5"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         signingConfig signingConfigs.release
     }
@@ -48,4 +58,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
 
     implementation 'com.google.firebase:firebase-analytics:17.4.4'
+
+    implementation 'pub.devrel:easypermissions:1.1.2'
+
+    implementation 'org.xwalk:xwalk_core_library:23.53.589.4'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

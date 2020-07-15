@@ -1,10 +1,11 @@
 package com.marcosalive2020;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,6 +35,7 @@ public class AboutActivity extends AppCompatActivity {
         return false;
     };
 
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +45,38 @@ public class AboutActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        getApplicationContext();
+        activity = this;
+
+    }
+
+    protected void exitDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        builder.setTitle("Deseja encerrar?");
+        builder.setMessage("Você está prestes a encerrar o aplicativo");
+        builder.setCancelable(true);
+
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                AboutActivity.super.onBackPressed();
+            }
+        });
+
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
     public void onBackPressed() {
-        ContextThemeWrapper ctw = new ContextThemeWrapper(this, R.style.AppTheme);
-        AlertDialog.Builder builder = new AlertDialog.Builder(ctw);
-        builder.setMessage("Deseja encerrar?")
-                .setCancelable(false)
-                .setPositiveButton("sim", (dialog, id) -> finish())
-                .setNegativeButton("Não", (dialog, id) -> dialog.cancel());
-        AlertDialog alert = builder.create();
-        alert.show();
+        exitDialog();
     }
 }

@@ -10,4 +10,7 @@
     <string name="title_portifolio">Portifólio</string>
     <string name="title_info">Info</string>
 
+    <string name="rationale_location">Permissões para localização</string>
+    <string name="rationale_write_storage">Gravar arquivos</string>
+
 </resources>
