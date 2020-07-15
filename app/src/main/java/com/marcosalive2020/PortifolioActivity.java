@@ -1,12 +1,15 @@
 package com.marcosalive2020;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,24 +20,16 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.DecelerateInterpolator;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.xwalk.core.XWalkPreferences;
 import org.xwalk.core.XWalkView;
 
-import java.util.List;
+public class PortifolioActivity extends AppCompatActivity {
 
-import pub.devrel.easypermissions.AfterPermissionGranted;
-import pub.devrel.easypermissions.AppSettingsDialog;
-import pub.devrel.easypermissions.EasyPermissions;
-
-public class PortifolioActivity extends AppCompatActivity
-        implements EasyPermissions.PermissionCallbacks {
-
-    private static final int PERMISSIONS = 123;
     private static final String TAG = "PortifolioActivity";
     private Activity activity;
     private XWalkView mXWalkView;
@@ -131,69 +126,10 @@ public class PortifolioActivity extends AppCompatActivity
         }
     }
 
-    private boolean hasWriteStoragePermissions() {
-        return EasyPermissions.hasPermissions(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-    }
-
-    private boolean hasReadStoragePermissions() {
-        return EasyPermissions.hasPermissions(this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
-    }
-
-    @AfterPermissionGranted(PERMISSIONS)
-    public void permissionsTask() {
-        if (hasWriteStoragePermissions()) {
-            // Have permission, do the thing!
-            mXWalkView.loadUrl("https://marcosnunes.github.io/Portifolio", null);
-        } else {
-            // Ask for one permission
-            EasyPermissions.requestPermissions(
-                    this,
-                    getString(R.string.rationale_write_storage),
-                    PERMISSIONS,
-                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
-
-        if (hasReadStoragePermissions()) {
-            // Have permission, do the thing!
-            mXWalkView.loadUrl("https://marcosnunes.github.io/Portifolio", null);
-        } else {
-            // Ask for one permission
-            EasyPermissions.requestPermissions(
-                    this,
-                    getString(R.string.rationale_write_storage),
-                    PERMISSIONS,
-                    android.Manifest.permission.READ_EXTERNAL_STORAGE);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        // EasyPermissions handles the request result.
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-    }
-
-    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
-        Log.d(TAG, "onPermissionsGranted:" + requestCode + ":" + perms.size());
-    }
-
-    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
-        Log.d(TAG, "onPermissionsDenied:" + requestCode + ":" + perms.size());
-
-        // (Optional) Check whether the user denied any permissions and checked "NEVER ASK AGAIN."
-        // This will display a dialog directing them to enable the permission in app settings.
-        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-            new AppSettingsDialog.Builder(this).build().show();
-        }
-    }
-
     @Override
     public void onStart() {
         super.onStart();
-        permissionsTask();
+        isWriteStoragePermissionGranted();
     }
 
     @Override
@@ -219,6 +155,21 @@ public class PortifolioActivity extends AppCompatActivity
         super.onDestroy();
         if (mXWalkView != null) {
             mXWalkView.onDestroy();
+        }
+    }
+
+    public void isWriteStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG, "Permission is granted2");
+            } else {
+
+                Log.v(TAG, "Permission is revoked2");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG, "Permission is granted2");
         }
     }
 
