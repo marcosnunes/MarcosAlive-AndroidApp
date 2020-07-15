@@ -13,12 +13,10 @@
         android:layout_marginBottom="55dp"
         android:orientation="vertical">
 
-        <org.xwalk.core.XWalkView
-            android:id="@+id/xwalkview"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-        </org.xwalk.core.XWalkView>
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 

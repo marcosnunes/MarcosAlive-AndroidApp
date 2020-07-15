@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -95,13 +94,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 splash.setAnimation(fadeOut);
-                splash.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        splash.setVisibility(View.GONE);
-                        webView.setVisibility(View.VISIBLE);
-                        webView.setAnimation(fadeIn);
-                    }
+                splash.postDelayed(() -> {
+                    splash.setVisibility(View.GONE);
+                    webView.setVisibility(View.VISIBLE);
+                    webView.setAnimation(fadeIn);
                 }, 1500);
             }
         });
@@ -135,18 +131,10 @@ public class MainActivity extends AppCompatActivity {
         builder.setMessage("Você está prestes a encerrar o aplicativo");
         builder.setCancelable(true);
 
-        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                MainActivity.super.onBackPressed();
-            }
-        });
+        builder.setPositiveButton("Sim", (dialogInterface, i) -> MainActivity.super.onBackPressed());
 
-        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+        builder.setNegativeButton("Não", (dialogInterface, i) -> {
 
-            }
         });
 
         AlertDialog dialog = builder.create();
